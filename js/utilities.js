@@ -12,8 +12,26 @@ function updateProductNumber(isIncrease, elementId) {
   return newProductNumber;
 }
 // diplay particular product price
-function displayProductPrice(totalProduct, productPriceField) {
-  const totalPrice = totalProduct * 1219;
+function displayProductPrice(totalProduct, perProductPrice, productPriceField) {
+  const totalPrice = totalProduct * perProductPrice;
   const displayPrice = document.getElementById(productPriceField);
   displayPrice.innerText = totalPrice;
+  return totalPrice;
+}
+// get current  particular total price of all products
+function getCurrentPrice(elementId) {
+  const priceEl = document.getElementById(elementId);
+  const currentPrice = parseInt(priceEl.innerText);
+  return currentPrice;
+}
+
+// calculate subtotal
+function getSubTotal() {
+  // get products current price
+  const currentPhonePrice = getCurrentPrice(phonePriceField);
+  const currentCasePrice = getCurrentPrice(casePriceField);
+  // subtotal
+  const subTotal = currentPhonePrice + currentCasePrice;
+  const subTotalField = document.getElementById('sub-total');
+  subTotalField.innerText = subTotal;
 }
