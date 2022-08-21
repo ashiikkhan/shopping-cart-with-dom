@@ -6,7 +6,11 @@ function updateProductNumber(isIncrease, elementId) {
   if (isIncrease) {
     newProductNumber = previousProductNumber + 1;
   } else {
-    newProductNumber = previousProductNumber - 1;
+    if (previousProductNumber > 0) {
+      newProductNumber = previousProductNumber - 1;
+    } else {
+      newProductNumber = previousProductNumber;
+    }
   }
   productNumberField.value = newProductNumber;
   return newProductNumber;
@@ -34,4 +38,22 @@ function getSubTotal() {
   const subTotal = currentPhonePrice + currentCasePrice;
   const subTotalField = document.getElementById('sub-total');
   subTotalField.innerText = subTotal;
+  return subTotal;
+}
+// calculate tax
+function getTax() {
+  const subTotalPrice = getSubTotal();
+  const taxAmount = Math.round(subTotalPrice * 0.1);
+  // set tax amount
+  const taxField = document.getElementById('tax');
+  taxField.innerText = taxAmount;
+  return taxAmount;
+}
+// calculate total
+function getTotal() {
+  const subtotal = getSubTotal();
+  const tax = getTax();
+  const totalPrice = subtotal + tax;
+  const totalField = document.getElementById('total');
+  totalField.innerText = totalPrice;
 }
